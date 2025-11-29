@@ -79,21 +79,22 @@ Ensure the following are installed on your machine:
 
 - Clone the repository
 
-  ```bash
-  git clone https://github.com/Flutter-Project-by-Mohammad-Abu-Alhijaa/QuickShop.git
-  cd QuickShop
-  ```
+```bash
+git clone https://github.com/Flutter-Project-by-Mohammad-Abu-Alhijaa/QuickShop.git
+cd QuickShop
+```
 
 - Install dependencies
 
 ```bash
-flutter pub get
+ flutter pub get
 ```
 
 - Run the application
-  ```bash
-  flutter run
-  ```
+
+```bash
+flutter run
+```
 
 ## 🧩 Upcoming Enhancements
 
