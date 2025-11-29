@@ -78,23 +78,23 @@ Ensure the following are installed on your machine:
 ### Installation
 
 - Clone the repository
+
   ```bash
   git clone https://github.com/Flutter-Project-by-Mohammad-Abu-Alhijaa/QuickShop.git
   cd QuickShop
   ```
 
-````
 - Install dependencies
- ```bash
- flutter pub get
-````
+
+```bash
+flutter pub get
+```
 
 - Run the application
   ```bash
   flutter run
   ```
 
-```
 ## 🧩 Upcoming Enhancements
 
 - 🔎 Product search
@@ -132,4 +132,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 If you find this project helpful, consider giving it a star! You can also reach out to me on [LinkedIn](https://www.linkedin.com/in/mohammad-ahmed-8a6b741b4/) or [Twitter](https://twitter.com/MohammadAhmed_1) for any questions or feedback.
 
 ---
+
+```
+
 ```
