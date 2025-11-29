@@ -6,7 +6,7 @@
 
 ### Your Modern Flutter E-Commerce Experience
 
-QuickShop is a fast, lightweight, and intuitive e-commerce application built with Flutter. It showcases real-world shopping features such as browsing products from REST APIs, managing favorites, and handling a complete cart flow — all wrapped in a clean and scalable MVC (Clean Structure) architecture.
+QuickShop is a fast, lightweight, and intuitive e-commerce application built with Flutter. It showcases real-world shopping features such as browsing products from REST APIs, managing favorites, and handling a complete cart flow all wrapped in a clean and scalable MVC (Clean Structure) architecture.
 
 ---
 
