@@ -1,11 +1,12 @@
 import 'package:best_e_commerce/Screens/Language_Page.dart';
+import 'package:best_e_commerce/Screens/Login.dart';
 import 'package:best_e_commerce/generated/l10n.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({super.key});
+  Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfilePageState();
@@ -15,7 +16,6 @@ class _ProfilePageState extends State<Profile> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // 🔹 Fetch Firestore user data
   Future<Map<String, dynamic>?> _getUserData() async {
     final uid = _auth.currentUser?.uid;
     if (uid == null) return null;
@@ -39,15 +39,15 @@ class _ProfilePageState extends State<Profile> {
         automaticallyImplyLeading: false,
         title: Text(
           S.of(context).myProfile,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.edit))],
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.edit))],
       ),
       body: FutureBuilder<Map<String, dynamic>?>(
         future: _getUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<Profile> {
           }
 
           if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text("No user data found"));
+            return Center(child: Text("No user data found"));
           }
 
           final userData = snapshot.data!;
@@ -92,22 +92,25 @@ class _ProfilePageState extends State<Profile> {
             {
               "title": S.of(context).language,
               "icon": Icons.language,
-              "page": const LanguagePage(),
+              "page": LanguagePage(),
             },
             {"title": S.of(context).helpSupport, "icon": Icons.help},
             {"title": S.of(context).aboutUs, "icon": Icons.info},
             {"title": S.of(context).termsOfService, "icon": Icons.description},
-            {"title": S.of(context).logout, "icon": Icons.logout},
+            {
+              "title": S.of(context).logout,
+              "icon": Icons.logout,
+              "page": Login_Screen(),
+            },
           ];
 
           return SingleChildScrollView(
             child: Column(
               children: [
-                // 🔹 Profile header
                 Container(
                   height: 220,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Color(0XFFff7643),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
@@ -116,35 +119,31 @@ class _ProfilePageState extends State<Profile> {
                   ),
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
-                      const CircleAvatar(
+                      SizedBox(height: 20),
+                      CircleAvatar(
                         radius: 50,
                         backgroundImage: AssetImage(
                           "assets/images/Profile Image.png",
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Text(
                         "${userData['firstName']} ${userData['lastName']}",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Text(
                         userData['email'] ?? user?.email ?? "No email",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ],
                   ),
                 ),
 
-                // 🔹 Profile info
                 ...profileData.map(
                   (item) => profileSitting(
                     name: item["name"] ?? "",
@@ -153,20 +152,15 @@ class _ProfilePageState extends State<Profile> {
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
 
-                // 🔹 Section title
                 Text(
                   S.of(context).accountSettings,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
 
-                // 🔹 Account settings
                 ...accountSettingsData.map(
                   (item) => accountSettings(
                     context: context,
@@ -191,7 +185,7 @@ Widget profileSitting({
 }) {
   return Column(
     children: [
-      const SizedBox(height: 20),
+      SizedBox(height: 20),
       Container(
         width: 350,
         height: 75,
@@ -200,7 +194,7 @@ Widget profileSitting({
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -208,24 +202,24 @@ Widget profileSitting({
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: const Color(0XFFff7643),
+                  color: Color(0XFFff7643),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, color: Colors.white),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -247,25 +241,29 @@ Widget accountSettings({
   required IconData icon,
   Widget? page,
 }) {
+  final _auth = FirebaseAuth.instance;
   return Column(
     children: [
       Container(
         width: 392,
         height: 60,
-        decoration: const BoxDecoration(),
+        decoration: BoxDecoration(),
         child: InkWell(
-          onTap: () {
+          onTap: () async {
             if (page != null) {
+              if (page is Login_Screen) {
+                await _auth.signOut();
+              }
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => page),
+                MaterialPageRoute(builder: (context) => page!),
               );
             }
           },
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.grey.shade200,
@@ -273,25 +271,25 @@ Widget accountSettings({
                   ),
                   width: 50,
                   height: 50,
-                  child: Icon(icon, color: const Color(0XFFff7643)),
+                  child: Icon(icon, color: Color(0XFFff7643)),
                 ),
               ),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Spacer(),
-              const Icon(Icons.arrow_forward_ios, size: 16),
-              const SizedBox(width: 30),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios, size: 16),
+              SizedBox(width: 30),
             ],
           ),
         ),
       ),
-      const SizedBox(height: 20),
+      SizedBox(height: 20),
     ],
   );
 }
