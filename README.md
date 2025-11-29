@@ -131,7 +131,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## 🙏 Support
 
 If you find this project helpful, consider giving it a star! You can also reach out to me on [LinkedIn](https://www.linkedin.com/in/mohammad-abu-alhayjaa/) for any questions or feedback.
-
-## 🙏 Support
-
-If you find this project helpful, consider giving it a star! You can also reach out to me on [LinkedIn](https://www.linkedin.com/in/mohammad-abu-alhayjaa/) for any questions or feedback.
